@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<title>RPS
+</title>
+<head>
+
+<link href="rps.css" rel="stylesheet" type="text/css">
+
+</head>
+<body>
+<h1>Rock Paper Scissors!</h1>
+<!--rock, paper, scissors buttons are created-->
+<button id="rock" class="options"><img src="../images/rock.webp">Rock</button>
+<button id="rock" class="options"><img src="../images/palm.jpg">Paper</button>
+<button id="rock" class="options"><img src="../images/scissors.png">Scissors</button>
+
+<div>
+    <h3>
+        <!--Score gets updated here!-->
+        Rithin <span id="r-score">0</span> - <span id="c-score">0</span> Computer
+    </h3>
+</div>
+</body>
+</html>
+<script>
+
+    /*here, all of the options are taken as an array object for essy iteration*/
+    const game_buttons = document.querySelectorAll(".options");
+    let rScore = 0;
+    let cScore = 0;
+    game_buttons.forEach((button) => {
+        button.addEventListener("click", function () {
+            const player1Option = this.textContent;
+
+            const preloadedOptions = ["Rock", "Paper", "Scissors"];
+            const player2Option = preloadedOptions[Math.floor(Math.random() * 3)];
+            compareInputs(player1Option, player2Option);
+            newScore(rScore, cScore);
+        });
+    });
+
+/*This function here compares the input of the player and the one of computer and returns the winner*/
+    function compareInputs(player1Option, player2Option) {
+        const currentMatch = `${player1Option} vs ${player2Option}`;
+
+        // Tie check
+        if (player1Option === player2Option) {
+            alert(`${currentMatch} is a Tie`);
+            return;
+        }
+
+        // Rock
+        if (player1Option === "Rock") {
+            if (player2Option === "Scissors") {
+                alert(`${currentMatch} = Rithin Wins`);
+                rScore++;
+            } else {
+                alert(`${currentMatch} = Computer Wins`);
+                cScore++;
+            }
+        }
+        // Paper
+        else if (player1Option === "Paper") {
+            if (player2Option === "Rock") {
+                alert(`${currentMatch} = Rithin Wins`);
+                rScore++;
+            } else {
+                alert(`${currentMatch} = Computer Wins`);
+                cScore++;
+            }
+        }
+        // Scissors
+        else if (player1Option === "Scissors") {
+            if (player2Option === "Paper") {
+                alert(`${currentMatch} = Rithin Wins`);
+                rScore++;
+            } else {
+                alert(`${currentMatch} = Computer Wins`);
+                cScore++;
+            }
+        }
+    }
+/*This function updates the DOM with the new scores*/
+    function newScore()
+    {
+        document.getElementById("r-score").textContent = rScore;
+        document.getElementById("c-score").textContent = cScore;
+    }
+
+</script>
